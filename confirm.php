@@ -61,7 +61,7 @@ $error_message = array();
                 <dd><p><?php echo $_POST['email'];?></p></dd>
 
                 <dt>お問い合わせ種別</dt>
-                <dd><p><?php if($_POST['genre'] === 1){echo 'ご予約について';}elseif(($_POST['genre'] === 2)){echo 'メニューについて';}elseif(($_POST['genre'] === 3)){echo '営業時間について';} ?></p></dd>
+                <dd><p><?php if($_POST['genre'] === '1'){echo 'ご予約について';}elseif($_POST['genre'] === '2'){echo 'メニューについて';}elseif($_POST['genre'] === '3'){echo '営業時間について';}?></p></dd>
 
                 <dt><span class="required">お問い合わせ内容</span></dt>
                 <dd><p><?php echo $_POST['message'];?></p></textarea></dd>
