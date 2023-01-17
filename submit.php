@@ -1,4 +1,8 @@
 <?php
+$token = null;
+$session_token = null;
+$error_massage = array();
+$option = null;
 
 session_start();
 
@@ -44,8 +48,7 @@ if( !empty($token) && $token == $session_token) {
             $pdo->rollBack();
         }
     }
-} 
-
+}
 ?>
 
 <!DOCTYPE html>

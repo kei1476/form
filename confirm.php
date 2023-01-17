@@ -1,7 +1,8 @@
 <?php
 
-$error_message = array();
+$token = null;
 $clean = null;
+$error_message = array();
 
 session_start();
 
