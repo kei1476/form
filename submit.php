@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 if(isset($_POST["token"])) {
     $token = $_POST["token"];
 }
@@ -10,7 +13,7 @@ if(isset($_SESSION['token'])) {
 unset($_SESSION["token"]);
 
 
-if( !empty($token) && $token === $session_token) {
+if( !empty($token) && $token == $session_token) {
     if(!empty($_POST['btn_submit'])) {
         try {
             $option = array(

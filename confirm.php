@@ -6,7 +6,7 @@ $clean = null;
 session_start();
 
 // 二重送信防止用トークンの発行
-$token = uniqid('', true);;
+$token = uniqid('', true);
 
 //トークンをセッション変数にセット
 $_SESSION['token'] = $token;
@@ -83,6 +83,7 @@ $_SESSION['token'] = $token;
 	        <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
 	        <input type="hidden" name="genre" value="<?php echo $_POST['genre']; ?>">
 	        <input type="hidden" name="message" value="<?php echo $_POST['message']; ?>">
+            <input type="hidden" name="token" value="<?php echo $token;?>">
         </form> 
     <?php endif;?>
 </body>
