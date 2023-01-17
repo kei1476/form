@@ -3,6 +3,7 @@ $token = null;
 $session_token = null;
 $error_massage = array();
 $option = null;
+$pdo = null;
 
 session_start();
 
@@ -15,7 +16,6 @@ if(isset($_SESSION['token'])) {
 }
 
 unset($_SESSION["token"]);
-
 
 if( !empty($token) && $token == $session_token) {
     if(!empty($_POST['btn_submit'])) {
@@ -48,6 +48,8 @@ if( !empty($token) && $token == $session_token) {
             $pdo->rollBack();
         }
     }
+
+    $pdo = null;
 }
 ?>
 
