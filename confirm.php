@@ -1,5 +1,15 @@
 <?php
+
 $error_message = array();
+$clean = null;
+
+session_start();
+
+// 二重送信防止用トークンの発行
+$token = uniqid('', true);;
+
+//トークンをセッション変数にセット
+$_SESSION['token'] = $token;
 
     if(empty($_POST['name'])) {
         $error_message[] = '名前を入力してください。'; 

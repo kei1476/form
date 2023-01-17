@@ -1,4 +1,5 @@
 <?php
+
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +33,7 @@
             <dt><span class="required">お問い合わせ内容</span></dt>
             <dd><textarea name="message" class="message"></textarea></dd>
         </dl>
+        <input type="hidden" name="token" value="<?php echo $token;?>">
         <div class="btn-area">
             <input type="submit" value="確認ページへ" name="btn_confirm" class="submit-btn">
         </div>
