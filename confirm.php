@@ -49,6 +49,14 @@ $_SESSION['token'] = $token;
 		$clean['message'] = preg_replace( '/\\r\\n|\\n|\\r/', '<br>', $clean['message']);
 	}
 
+    if(!empty($error_message)) {
+        $_SESSION['error'] = $error_message;
+        header('Location:index.php');
+    }else{
+        unset($_SESSION['error']);
+    }
+    
+
 
 ?>
 
@@ -62,14 +70,7 @@ $_SESSION['token'] = $token;
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <?php if(!empty($error_message)):?>
-        <ul>
-            <?php foreach($error_message as $value):?>
-                <li class="error-message"><?php echo $value;?></li>
-            <?php endforeach;?>
-        </ul>
-        <a href="index.php" class="back">戻る</a>
-        <?php else:?>
+
             <h1 class="confirm-title">確認画面</h1>
         <form action="submit.php" method="post">
             <dl class="form_area">
@@ -88,12 +89,12 @@ $_SESSION['token'] = $token;
             <div class="btn-area">
                 <input type="submit" value="送信" class="submit-btn" name="btn_submit">
             </div>
+            <a href="index.php" class="back">戻る</a>
             <input type="hidden" name="name" value="<?php echo $clean['name']; ?>">
 	        <input type="hidden" name="email" value="<?php echo $clean['email']; ?>">
 	        <input type="hidden" name="genre" value="<?php echo $_POST['genre']; ?>">
 	        <input type="hidden" name="message" value="<?php echo $_POST['message']; ?>">
             <input type="hidden" name="token" value="<?php echo $token;?>">
         </form> 
-    <?php endif;?>
 </body>
 </html>

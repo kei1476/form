@@ -70,21 +70,19 @@ form {
     font-weight: bold;
 }
 
-/* 確認ページ */
+
 ul {
     width: 500px;
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #f8f8f8;
-    border: 1px solid #aaaaaa;
-    padding: 40px 20px 40px 20px;
+    padding: 40px 20px 10px 20px;
 }
 
 .error-message {
     border: 1px solid red;
     border-radius: 16px;
-    color: red;
+    color: rgb(255, 0, 0);
     padding: 12px;
     text-align: center;
     list-style: none;

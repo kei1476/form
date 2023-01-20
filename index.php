@@ -14,6 +14,13 @@ session_start();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php if(!empty($_SESSION['error'])):?>
+    <ul>
+        <?php foreach($_SESSION['error'] as $value):?>
+            <li class="error-message"><?php echo $value;?></li>
+        <?php endforeach;?>
+    </ul>
+    <?php endif;?>
     <form action="confirm.php" method="post">
         <dl class="form_area">
 
@@ -33,7 +40,7 @@ session_start();
             </dd>
             
             <dt><span class="required">お問い合わせ内容</span></dt>
-            <dd><textarea name="message" class="message" value="<?php echo $_SESSION['form_content']['message'];?>"></textarea></dd>
+            <dd><textarea name="message" class="message" ><?php echo $_SESSION['form_content']['message'];?></textarea></dd>
         </dl>
         <div class="btn-area">
             <input type="submit" value="確認ページへ" name="btn_confirm" class="submit-btn">
