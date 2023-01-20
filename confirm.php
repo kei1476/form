@@ -6,6 +6,13 @@ $error_message = array();
 
 session_start();
 
+$_SESSION['form_content'] = [
+    'name' => $_POST['name'],
+    'email' => $_POST['email'],
+    'genre' => $_POST['genre'],
+    'message' => $_POST['message']
+];
+
 // 二重送信防止用トークンの発行
 $token = uniqid('', true);
 
@@ -42,6 +49,7 @@ $_SESSION['token'] = $token;
 		$clean['message'] = preg_replace( '/\\r\\n|\\n|\\r/', '<br>', $clean['message']);
 	}
 
+
 ?>
 
 <!DOCTYPE html>
@@ -66,22 +74,22 @@ $_SESSION['token'] = $token;
         <form action="submit.php" method="post">
             <dl class="form_area">
                 <dt><span class="required">お名前</span></dt>
-                <dd><p><?php echo $_POST['name'];?></p></dd>
+                <dd><p><?php echo $clean['name'];?></p></dd>
                 
                 <dt><span class="required">メールアドレス</span></dt>
-                <dd><p><?php echo $_POST['email'];?></p></dd>
+                <dd><p><?php echo $clean['email'];?></p></dd>
 
                 <dt>お問い合わせ種別</dt>
                 <dd><p><?php if($_POST['genre'] === '1'){echo 'ご予約について';}elseif($_POST['genre'] === '2'){echo 'メニューについて';}elseif($_POST['genre'] === '3'){echo '営業時間について';}?></p></dd>
 
                 <dt><span class="required">お問い合わせ内容</span></dt>
-                <dd><p><?php echo $_POST['message'];?></p></textarea></dd>
+                <dd><p><?php echo $clean['message'];?></p></textarea></dd>
             </dl>
             <div class="btn-area">
                 <input type="submit" value="送信" class="submit-btn" name="btn_submit">
             </div>
-            <input type="hidden" name="name" value="<?php echo $_POST['name']; ?>">
-	        <input type="hidden" name="email" value="<?php echo $_POST['email']; ?>">
+            <input type="hidden" name="name" value="<?php echo $clean['name']; ?>">
+	        <input type="hidden" name="email" value="<?php echo $clean['email']; ?>">
 	        <input type="hidden" name="genre" value="<?php echo $_POST['genre']; ?>">
 	        <input type="hidden" name="message" value="<?php echo $_POST['message']; ?>">
             <input type="hidden" name="token" value="<?php echo $token;?>">
