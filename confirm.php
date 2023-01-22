@@ -30,11 +30,10 @@ $_SESSION['token'] = $token;
 
     if(empty($_POST['email'])) {
         $error_message[] = 'メールアドレスを入力してください';
+    }elseif(preg_match('/^[a-z0-9._+^~-]+@[a-z0-9.-]+$/i', $_POST['email']) === false) {
+        $error_message[] = '正しい形式で入力してください。' ;
     }else {
         $clean['email'] = htmlspecialchars($_POST['email'],ENT_QUOTES,'UTF-8');
-
-        $clean['email'] = preg_match('/^[a-z0-9._+^~-]+@[a-z0-9.-]+$/i', $clean['email']);
-
     }
 
     if(empty($_POST['genre'])) {
@@ -56,7 +55,6 @@ $_SESSION['token'] = $token;
         unset($_SESSION['error']);
     }
     
-
 
 ?>
 

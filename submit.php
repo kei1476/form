@@ -4,6 +4,9 @@ $session_token = null;
 $error_massage = array();
 $option = null;
 $pdo = null;
+$auto_reply_subject = null;
+$auto_reply_text = null;
+date_default_timezone_set('Asia/Tokyo');
 
 session_start();
 
@@ -43,6 +46,32 @@ if( !empty($token) && $token == $session_token) {
             $stmt->execute();
         
             $pdo->commit();
+
+            $header = "MIME-Version: 1.0\n";
+	        $header = "From: Kei1476 <kei1476to@outlook.jp>\n";
+	        $header = "Reply-To: Kei1476 <kei1476to@outlook.jp>\n";
+
+            $auto_reply_subject = 'お問い合わせありがとうございます。';
+
+            $auto_reply_text = "この度は、お問い合わせ頂き誠にありがとうございます。下記の内容でお問い合わせを受け付けました。\n\n";
+            $auto_reply_text = "お問い合わせ日時：" . date("Y-m-d H:i") . "\n";
+	        $auto_reply_text = "氏名：" . $_POST['name'] . "\n";
+	        $auto_reply_text = "メールアドレス：" . $_POST['email'] . "\n\n";
+
+            mb_send_mail($_POST['email'],$auto_reply_subject,$auto_reply_text,$header);
+
+            $admin_reply_subject = "お問い合わせを受け付けました";
+	
+
+            $admin_reply_text = "下記の内容でお問い合わせがありました。\n\n";
+            $admin_reply_text = "お問い合わせ日時：" . date("Y-m-d H:i") . "\n";
+            $admin_reply_text = "氏名：" . $_POST['name'] . "\n";
+            $admin_reply_text = "メールアドレス：" . $_POST['email'] . "\n\n";
+
+            mb_send_mail( 'kei1476to@outlook.jp', $admin_reply_subject, $admin_reply_text, $header);
+
+            unset($_SESSION['form_content']);
+            
         
         } catch(PDOExeption $e) {
             $pdo->rollBack();
